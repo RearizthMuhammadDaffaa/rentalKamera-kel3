@@ -40,7 +40,7 @@ const Navbar = () => {
       }}
       elevation={3}
     >
-      <BottomNavigation sx={{ gap: "35px" }} showLabels value={value}>
+      <BottomNavigation sx={{ gap: "35px" }}  value={value}>
         <Link to="/" >
           <BottomNavigationAction
             value="Home"

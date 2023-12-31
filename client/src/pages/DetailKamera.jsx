@@ -1,13 +1,26 @@
 import { Box, Button, Container, Stack, Typography } from '@mui/material'
 import { ArrowBack,Favorite,Star,CalendarMonth,AccessTimeOutlined} from '@mui/icons-material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../app.css'
 import kamera from "../assets/img/image 7.jpg"
 import timeSquare from "../assets/img/Time Square.jpg"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const DetailKamera = () => {
   const [transaksi,setTransaksi] = useState(true);
+  const {id} = useParams();
+  const [data,setData] = useState({})
+
+  const getData = async () =>{
+    const response = await axios.get(`http://localhost:5000/kamera/${id}`)
+    setData(response.data)
+  }
+
+  useEffect(()=>{
+    getData(id)
+  },[])
 
   return (
     <div className="container" style={{height:'100vh'}} >
@@ -72,7 +85,7 @@ const DetailKamera = () => {
           }}
         >
           <Typography variant='h6' fontSize="24px" fontWeight="600">
-            Sony
+            {data.name}
           </Typography>
           <Box
             display='flex'
@@ -106,7 +119,7 @@ const DetailKamera = () => {
           alignItems='center'
           padding={3}
         >
-          <img src={kamera} alt="" />
+          <img src={data.url} alt="" width='232px' height='145px'/>
         </Box>
     </Container>
     <Container
@@ -142,7 +155,7 @@ const DetailKamera = () => {
             <Typography
             fontSize='12px'
             fontWeight='300'
-            >HD 4K up to 120p</Typography>
+            >{data.cinemacam}p</Typography>
         </Box>
         <Box
           display='flex'
@@ -160,11 +173,11 @@ const DetailKamera = () => {
             <Typography
               fontSize='12px'
               fontWeight='700'
-            >Cinemacam</Typography>
+            >Battery</Typography>
             <Typography
             fontSize='12px'
             fontWeight='300'
-            >HD 4K up to 120p</Typography>
+            >{data.battery}</Typography>
         </Box>
         <Box
           display='flex'
@@ -182,11 +195,11 @@ const DetailKamera = () => {
             <Typography
               fontSize='12px'
               fontWeight='700'
-            >Cinemacam</Typography>
+            >Lens</Typography>
             <Typography
             fontSize='12px'
             fontWeight='300'
-            >HD 4K up to 120p</Typography>
+            >{data.lens}</Typography>
         </Box>
        
       </Box>
