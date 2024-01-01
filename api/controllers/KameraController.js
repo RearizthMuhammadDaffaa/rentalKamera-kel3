@@ -1,6 +1,7 @@
 import Kamera from "../models/KameraModels.js";
 import path from "path";
 import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
 
 export const getKamera = async (req,res)=>{
   try {
@@ -39,7 +40,8 @@ export const saveKamera = (req,res)=>{
   const file = req.files.img;
   const fileSize = file.data.length;
   const ext = path.extname(file.name);
-  const fileName = file.md5 +ext;
+  const uniqueFilename = uuidv4();
+  const fileName = `${uniqueFilename}${ext}`;
   const url = `${req.protocol}://${req.get('host')}/images/${fileName}`;
   const allowedTypes = ['.jpg','.png','.jpeg'];
   if(!allowedTypes.includes(ext.toLowerCase())) return res.status(422).json({msg:'Invalid Images'})
