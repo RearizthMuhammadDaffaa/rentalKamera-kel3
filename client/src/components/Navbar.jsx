@@ -4,6 +4,7 @@ import {
   ShoppingBagOutlined,
   PersonOutlined,
   Home,
+  Dashboard,
 } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -40,7 +41,7 @@ const Navbar = () => {
       }}
       elevation={3}
     >
-      <BottomNavigation sx={{ gap: "35px" }}  value={value}>
+      <BottomNavigation sx={{ gap: "10px" }}  value={value}>
         <Link to="/" >
           <BottomNavigationAction
             value="Home"
@@ -64,6 +65,14 @@ const Navbar = () => {
             label="Profile"
             sx={{ color: value === "Profile" ? "#007BFF" : "" }}
             icon={<PersonOutlined />}
+          />
+        </Link>
+        <Link to="/dashboard">
+          <BottomNavigationAction
+            value="dashboard"
+            label="dasboard"
+            sx={{ color: value === "dashboard" ? "#007BFF" : "" }}
+            icon={<Dashboard />}
           />
         </Link>
       </BottomNavigation>

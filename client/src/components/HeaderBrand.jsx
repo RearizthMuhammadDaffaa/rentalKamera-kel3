@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import sony from "../assets/img/image 1.png"
 import axios from 'axios';
 
-const HeaderBrand = ({type}) => {
+const HeaderBrand = ({type,setSelectedMerk}) => {
   const [data,setData] = useState([]);
 
   const getData = async ()=>{
@@ -17,7 +17,9 @@ const HeaderBrand = ({type}) => {
   },[])
 
   return (
-    <Box sx={{display:'flex',marginTop:'15px',flexDirection:'column',paddingX:'7px'}}>
+    <Box 
+   
+    sx={{display:'flex',marginTop:'15px',flexDirection:'column',paddingX:'7px'}}>
       <Container sx={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'30px'}}>
         <Typography variant='h4' >
           {type === "katalog"? "Katalog" : "Merk"}
@@ -36,6 +38,8 @@ const HeaderBrand = ({type}) => {
        {data.map((item)=>(
           <Box 
             key={item.id}
+            component='div'
+            onClick={()=>setSelectedMerk(item.name)}
           sx={{
             display:'flex',
             padding:'21px 0px 21px 0px',
@@ -46,7 +50,8 @@ const HeaderBrand = ({type}) => {
             borderRadius:'20px',
             boxShadow:'0px 4px 5.6px 0px rgba(0, 0, 0, 0.08)',
             minWidth: '150px',
-            flexShrink:'0'
+            flexShrink:'0',
+            cursor:'pointer'
           }}>
             <img src={item.url} alt="" width="60px" height="11"/>
             <Typography variant='subtitle2'>

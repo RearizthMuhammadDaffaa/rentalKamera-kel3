@@ -5,7 +5,7 @@ import '../app.css'
 import kamera from "../assets/img/image 7.jpg"
 import timeSquare from "../assets/img/Time Square.jpg"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const DetailKamera = () => {
@@ -243,7 +243,7 @@ const DetailKamera = () => {
           
         >
          <AccessTimeOutlined color={transaksi ? 'primary' :'disabled'}/>
-          <Typography fontSize='12px' fontWeight='700' color={transaksi ? "#007BFF" :'#CCC'}>600K</Typography>
+          <Typography fontSize='12px' fontWeight='700' color={transaksi ? "#007BFF" :'#CCC'}>{data.daysPrice}</Typography>
         </Box>
         <Box
           display='flex'
@@ -304,12 +304,16 @@ const DetailKamera = () => {
         </Box>
 
       </Box>
-    </Stack>
-    <Box sx={{
+
+      <Box sx={{
       width:'100%'
     }}>
+      <Link to={`/transaksi/${id}`}>
       <Button variant='contained' sx={{width:'100%',borderRadius:'16px'}}>Pesan Sekarang</Button>
+      </Link>
     </Box>
+    </Stack>
+    
     </Container>
     </div>
   )

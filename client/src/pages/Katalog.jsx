@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Katalog = () => {
   const [data,setData] = useState([]);
+  const [selectedMerk ,setSelectedMerk] = useState('all')
   // const [merk,setMerk] = useState([])
 
   // const getDataMerk = async ()=>{
@@ -13,19 +14,25 @@ const Katalog = () => {
   //   setMerk(response.data)
   // }
   const getData = async ()=>{
-    const response = await axios.get('http://localhost:5000/kamera')
+    if(selectedMerk == 'all') {
+      const response = await axios.get('http://localhost:5000/kamera')
+      setData(response.data)
+    } else{
+      const response = await axios.get(`http://localhost:5000/kamera/sort?merk=${selectedMerk}`)
     setData(response.data)
+    }
+    
     
   }
   useEffect(()=>{  
     getData()
     
-  },[])
+  },[selectedMerk])
   return (
     <div className="container">
-      <HeaderBrand type="katalog"/>
+      <HeaderBrand type="katalog" selectedMerk ={selectedMerk} setSelectedMerk={setSelectedMerk}/>
       {data.map((item)=>(
-          <List kamera={item} key={item.id}/>
+          <List kamera={item} key={item.id}  />
       ))}
       
     </div>
