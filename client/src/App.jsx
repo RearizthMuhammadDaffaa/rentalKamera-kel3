@@ -11,6 +11,8 @@ import Navbar from './components/Navbar'
 import DaysTransaksi from './pages/DaysTransaksi'
 import Dashboard from './pages/Dashboard'
 import ListKamera from './pages/ListKamera'
+import AddKamera from './pages/AddKamera'
+import EditKamera from './pages/EditKamera'
 
 
 
@@ -27,6 +29,8 @@ function App() {
     <Route path='/profile' element={<Profile />}/>
     <Route path='/dashboard' element={<Dashboard />}/>
     <Route path='/dashboard/ListKamera' element={<ListKamera />}/>
+    <Route path='/dashboard/addkamera' element={<AddKamera />}/>
+    <Route path='/dashboard/editkamera/:id' element={<EditKamera />}/>
     <Route path='/transaksi/:id' element={<DaysTransaksi />}/>
   
   </Routes>

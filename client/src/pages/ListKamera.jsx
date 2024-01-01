@@ -2,6 +2,7 @@ import { ArrowBack } from '@mui/icons-material'
 import { Box, Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const ListKamera = () => {
 
@@ -14,6 +15,15 @@ const ListKamera = () => {
   useEffect(()=>{  
     getData()
   },[])
+
+  const deletekamera = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:5000/kamera/${productId}`);
+      getData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   return (
@@ -53,8 +63,10 @@ const ListKamera = () => {
             justifyContent:'flex-end'
           }}
          >
+          <Link to="/dashboard/addkamera">
           
           <Button>Add New</Button>
+          </Link>
           </Container> 
         
         <Container
@@ -83,7 +95,7 @@ const ListKamera = () => {
         <TableBody>
           {data.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
              
@@ -96,8 +108,11 @@ const ListKamera = () => {
               <TableCell align="right">{row.daysPrice}</TableCell>
               <TableCell align="right">{row.hoursPrice}</TableCell>
               <TableCell align="right">
+                <Link to={`/dashboard/editkamera/${row.id}`}>
+                
                 <Button>Update</Button>
-                <Button>Delete</Button>
+                </Link>
+                <Button onClick={()=>deletekamera(row.id)}>Delete</Button>
               </TableCell>
             </TableRow>
           ))}
