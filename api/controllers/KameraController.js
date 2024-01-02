@@ -157,7 +157,9 @@ export const getKameraByName = async(req,res)=>{
   try {
     const name = req.query.name;
   const response = await Kamera.findAll({where:{
-    [Op.like]:name
+    name:{
+      [Op.like]: `%${name}%`, 
+    }
   }})
   res.json(response)
   res.status(400).json({msg:'data ditemukan'})

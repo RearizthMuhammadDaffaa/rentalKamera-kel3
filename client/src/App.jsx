@@ -13,6 +13,8 @@ import Dashboard from './pages/Dashboard'
 import ListKamera from './pages/ListKamera'
 import AddKamera from './pages/AddKamera'
 import EditKamera from './pages/EditKamera'
+import SearchList from './pages/SearchList'
+import HoursTransaksi from './pages/HoursTransaksi'
 
 
 
@@ -32,6 +34,8 @@ function App() {
     <Route path='/dashboard/addkamera' element={<AddKamera />}/>
     <Route path='/dashboard/editkamera/:id' element={<EditKamera />}/>
     <Route path='/transaksi/:id' element={<DaysTransaksi />}/>
+    <Route path='/day/:id' element={<HoursTransaksi/>}/>
+    <Route path='/search/:search' element={<SearchList />}/>
   
   </Routes>
     <Navbar />

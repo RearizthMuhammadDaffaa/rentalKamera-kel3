@@ -16,7 +16,7 @@ import {
 const router = express.Router();
 
 router.get('/kamera',getKamera);
-router.get('/kamera',getKameraByName);
+router.get('/kamera/search',getKameraByName);
 router.get('/kamera/sort',getKameraByMerk);
 router.get('/kamera/count',countByMerk);
 router.get('/kamera/:id',getKameraById);

@@ -39,10 +39,12 @@ const List = ({kamera}) => {
           </Typography>
           </Container>
           <Container sx={{display:'flex',justifyContent:'center',paddingBottom:'15px'}}>
-            <Link to={`/${kamera.id}`}>
-              <Button variant='contained' sx={{width:'50%'}}>Rental</Button>
+            <Link to={`/${kamera.id}`} style={{width:'100%'}}>
+              <Button sx={{width:'100%'}} variant='contained' >Rental</Button>
             </Link>
-            <Button variant='outlined' sx={{width:'50%',marginLeft:'10px'}}>Info</Button>
+            <Link style={{width:'100%'}}>
+            <Button variant='outlined' sx={{width:'100%',marginLeft:'10px'}}>Info</Button>
+            </Link>
           </Container>
         </Box>
       
