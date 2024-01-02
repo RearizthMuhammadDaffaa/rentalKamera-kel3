@@ -1,4 +1,4 @@
-import { CameraAltOutlined } from '@mui/icons-material'
+import { CameraAltOutlined, Person } from '@mui/icons-material'
 import { Box, Container, Paper, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -42,21 +42,21 @@ const Dashboard = () => {
           
         </Paper>
         </Link>
-        <Link>
+        <Link to='/dashboard/UserRental'>
         <Paper 
           sx={{
             padding:'20px',
           
           }}
         >
-          <CameraAltOutlined
+          <Person
             sx={{
               width:'200px',
               height:'80px'
             }}
           />
 
-          <Typography variant='h6' align='center'>Brand</Typography>
+          <Typography variant='h6' align='center'>USER RENTAL</Typography>
           
         </Paper>
         </Link>

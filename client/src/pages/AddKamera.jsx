@@ -338,12 +338,12 @@ const AddKamera = () => {
         
       </Box>
     
-      {/* <Button type='submit' variant="contained" sx={{
+      <Button type='submit' variant="contained" sx={{
         display:'flex',
         padding:'12px 8px',
         borderRadius:'16px',
-      }}> Tambah</Button> */}
-      <button type='submit'>Tambah</button>
+      }}> Tambah</Button>
+      {/* <button type='submit'>Tambah</button> */}
     </Container>
       </form>
     </Container>

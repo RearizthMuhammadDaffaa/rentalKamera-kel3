@@ -1,8 +1,54 @@
 import { AccountBalanceOutlined, ArrowBack, CreditCardOutlined, PersonOutline } from '@mui/icons-material'
 import { Box, Button, Container, InputBase, Typography } from '@mui/material'
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 
 const HoursTransaksi = () => {
+  const {id} = useParams();
+  const [data,setData] = useState({})
+  const [hargaTotal,setHargaTotal] = useState(data.daysPrice)
+  const [name,setName] = useState('')
+  const [noNik,setNoNik] = useState('')
+  const [hoursRent,setHoursRent] = useState('')
+  const navigate = useNavigate();
+
+  const getData = async () =>{
+    const response = await axios.get(`http://localhost:5000/kamera/${id}`)
+    setData(response.data)
+  }
+
+  const handleHarga = (e)=>{
+    setHargaTotal(data.daysPrice * e.target.value)
+    setHoursRent(e.target.value)
+  }
+
+  const saveTransaksi = async(e)=>{
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append('name',name)
+    formData.append('noNik',noNik)
+    formData.append('hoursRent',hoursRent)
+    
+
+    try {
+      await axios.post('http://localhost:5000/transaksi',formData,{
+        headers:{
+          "Content-type": "multipart/form-data",
+        }
+      })
+      navigate('/dashboard/listkamera')
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    
+    
+    getData(id)
+  },[hargaTotal])
+
   return (
     <Container sx={{
       height:'100vh',
@@ -41,6 +87,34 @@ const HoursTransaksi = () => {
         minHeight:'100vh'
       }}
     >
+      <form onSubmit={saveTransaksi}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems='flex-start'
+        gap="12px"
+        alignSelf='stretch'
+      >
+        <Typography
+          fontSize='18px'
+          fontWeight='500'
+        >
+          SEWA PERJAM
+        </Typography>
+        <Box 
+          display='flex'
+          alignItems='center'
+          gap="24px"
+          alignSelf='stretch'
+          padding="0px 10px"
+          border="1px solid #9b9b9b"
+          borderRadius='16px'
+        >
+         
+        <InputBase onChange={(e)=>handleHarga(e)} type='number' placeholder="Berapa jam"/>
+        </Box>
+        
+      </Box>
       <Box
         display="flex"
         flexDirection="column"
@@ -64,7 +138,7 @@ const HoursTransaksi = () => {
           borderRadius='16px'
         >
           <PersonOutline />
-        <InputBase placeholder="Masukan Nama Anda"/>
+        <InputBase onChange={(e)=>setName(e.target.value)} placeholder="Masukan Nama Anda"/>
         </Box>
         
       </Box>
@@ -91,7 +165,7 @@ const HoursTransaksi = () => {
           borderRadius='16px'
         >
           <CreditCardOutlined />
-        <InputBase placeholder="Masukan NIK Anda"/>
+        <InputBase onChange={(e)=>setNoNik(e.target.value)} placeholder="Masukan NIK Anda"/>
         </Box>
         
       </Box>
@@ -122,11 +196,12 @@ const HoursTransaksi = () => {
         </Box>
        
       </Box>
-      <Button variant="contained" sx={{
+      <Button type='submit' variant="contained" sx={{
         display:'flex',
         padding:'12px 8px',
         borderRadius:'16px',
-      }}> |PESAN SEKARANG</Button>
+      }}> {hargaTotal} |PESAN SEKARANG</Button>
+      </form>
     </Container>
       
     </Container>

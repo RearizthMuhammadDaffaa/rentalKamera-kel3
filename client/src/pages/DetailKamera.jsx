@@ -18,6 +18,8 @@ const DetailKamera = () => {
     setData(response.data)
   }
 
+  const [favorite,setFavorite] = useState(false)
+
   useEffect(()=>{
     getData(id)
   },[])
@@ -62,8 +64,10 @@ const DetailKamera = () => {
                 height:'48px'
               }}
             >
+              <Link to="/" style={{cursor:'pointer',textDecoration:'none'}}>           
+                  <ArrowBack />
+              </Link>
 
-            <ArrowBack />
             </Box>
             <Box
               display='flex'
@@ -77,8 +81,10 @@ const DetailKamera = () => {
                 height:'48px'
               }}
             >
+            <Box component='div' onClick={()=>setFavorite(!favorite)} sx={{cursor:'pointer'}}>
 
-            <Favorite />
+            <Favorite color={favorite?'error':''} />
+            </Box>
             </Box>
           
          
@@ -232,6 +238,7 @@ const DetailKamera = () => {
         sx={{
           background:'#FFF',
           borderRadius:'20px',
+          cursor:'pointer'
         }}
       >
         <Box
@@ -274,7 +281,8 @@ const DetailKamera = () => {
         marginY={3}
         sx={{
           background:'#FFF',
-          borderRadius:'20px'
+          borderRadius:'20px',
+          cursor:'pointer'
         }}
       >
         <Box

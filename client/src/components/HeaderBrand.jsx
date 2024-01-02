@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import sony from "../assets/img/image 1.png"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const HeaderBrand = ({type,setSelectedMerk}) => {
   const [data,setData] = useState([]);
@@ -47,15 +48,39 @@ const HeaderBrand = ({type,setSelectedMerk}) => {
         </Typography>
 
         {type != "katalog"&& <Typography variant='subtitle2'>
+        <Link to='/katalog'>
           Lihat Semua
-         
           <ArrowForwardIosIcon sx={{fontSize:'15px'}} />
+          </Link> 
         </Typography>}
        
       </Container>
       
       <Container component='div' sx={{display:'flex',overflowX:'scroll',width:'100%',gap:'10px'}}>
-       
+    { type == "katalog" && 
+     <Box 
+           
+            component='div'
+            onClick={()=>setSelectedMerk('all')}
+          sx={{
+            display:'flex',
+            padding:'21px 0px 21px 0px',
+            flexDirection:'column',
+            justifyContent:'center',
+            alignItems:'center',
+            gap:'12px',
+            borderRadius:'20px',
+            boxShadow:'0px 4px 5.6px 0px rgba(0, 0, 0, 0.08)',
+            minWidth: '150px',
+            flexShrink:'0',
+            cursor:'pointer'
+          }}>
+            {/* <img src={item.merk.url} alt="" width="60px" height="11"/> */}
+            <Typography variant='subtitle2'>
+             Semua Brand
+            </Typography>
+           
+      </Box>}
        {data.map((item)=>(
           <Box 
             key={item.merk.id}

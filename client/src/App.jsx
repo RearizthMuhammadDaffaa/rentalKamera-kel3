@@ -15,6 +15,7 @@ import AddKamera from './pages/AddKamera'
 import EditKamera from './pages/EditKamera'
 import SearchList from './pages/SearchList'
 import HoursTransaksi from './pages/HoursTransaksi'
+import UserRental from './pages/UserRental'
 
 
 
@@ -31,6 +32,7 @@ function App() {
     <Route path='/profile' element={<Profile />}/>
     <Route path='/dashboard' element={<Dashboard />}/>
     <Route path='/dashboard/ListKamera' element={<ListKamera />}/>
+    <Route path='/dashboard/UserRental' element={<UserRental />}/>
     <Route path='/dashboard/addkamera' element={<AddKamera />}/>
     <Route path='/dashboard/editkamera/:id' element={<EditKamera />}/>
     <Route path='/transaksi/:id' element={<DaysTransaksi />}/>

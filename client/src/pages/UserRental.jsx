@@ -4,11 +4,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const ListKamera = () => {
+const UserRental = () => {
 
   const [data,setData] = useState([]);
   const getData = async ()=>{
-    const response = await axios.get('http://localhost:5000/kamera')
+    const response = await axios.get('http://localhost:5000/transaksi')
     setData(response.data)
     
   }
@@ -18,7 +18,7 @@ const ListKamera = () => {
 
   const deletekamera = async (productId) => {
     try {
-      await axios.delete(`http://localhost:5000/kamera/${productId}`);
+      await axios.delete(`http://localhost:5000/transaksi/${productId}`);
       getData();
     } catch (error) {
       console.log(error);
@@ -48,7 +48,7 @@ const ListKamera = () => {
             borderRadius: "20px",
           }}
         >
-         <Link to='/dashboard'>        
+          <Link to='/dashboard'>        
           <ArrowBack />
           </Link>
         </Box>
@@ -65,10 +65,6 @@ const ListKamera = () => {
             justifyContent:'flex-end'
           }}
          >
-          <Link to="/dashboard/addkamera">
-          
-          <Button>Add New</Button>
-          </Link>
           </Container> 
         
         <Container
@@ -83,15 +79,11 @@ const ListKamera = () => {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>gambar</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell align="center">Merk</TableCell>
-            <TableCell align="center">lens</TableCell>
-            <TableCell align="center">Cinemacam</TableCell>
-            <TableCell align="center">battery</TableCell>
-            <TableCell align="center">Harga/Hari</TableCell>
-            <TableCell align="center">Harga/Jam</TableCell>
-            <TableCell align="center">Aksi</TableCell>
+            <TableCell align="center">NO NIK</TableCell>
+            <TableCell align="center">START DATE</TableCell>
+            <TableCell align="center">END DATE</TableCell>
+            <TableCell align="center">HOURS RENT</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -99,22 +91,15 @@ const ListKamera = () => {
             <TableRow
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-             
-              <TableCell align="right"><img src={row.url} alt="" width='50px'  height='50px'/></TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.merk}</TableCell>
-              <TableCell align="right">{row.lens}</TableCell>
-              <TableCell align="right">{row.cinemacam}</TableCell>
-              <TableCell align="right">{row.battery}</TableCell>
-              <TableCell align="right">{row.daysPrice}</TableCell>
-              <TableCell align="right">{row.hoursPrice}</TableCell>
-              <TableCell align="right">
-                <Link to={`/dashboard/editkamera/${row.id}`}>
-                
-                <Button  variant="contained" color='success'>Update</Button>
-                </Link>
-                <Button  variant="contained" color='error' onClick={()=>deletekamera(row.id)}>Delete</Button>
+            >             
+              <TableCell align="center">{row.name}</TableCell>
+              <TableCell align="center">{row.noNik}</TableCell>
+              <TableCell align="center">{row.startDate}</TableCell>
+              <TableCell align="center">{row.endDate}</TableCell>
+              <TableCell align="center">{row.hoursRent}</TableCell>
+              <TableCell align="center">
+               
+                <Button variant="contained" color='success' onClick={()=>deletekamera(row.id)}>Delete</Button>
               </TableCell>
             </TableRow>
           ))}
@@ -127,4 +112,4 @@ const ListKamera = () => {
   )
 }
 
-export default ListKamera
+export default UserRental
