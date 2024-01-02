@@ -23,7 +23,11 @@ const DetailKamera = () => {
   },[])
 
   return (
-    <div className="container" style={{height:'100vh'}} >
+    <Container  sx={{
+      width:{md:'50%',sm:"100%"},
+      minHeight:"100vh",
+      padding:'0'
+    }}  >
     <Container
     maxWidth="sm"
       sx={{
@@ -306,7 +310,9 @@ const DetailKamera = () => {
       </Box>
 
       <Box sx={{
-      width:'100%'
+      width:'100%',
+      marginBottom:{md:'100px',sm:'0'},
+      height:'200px'
     }}>
       <Link to={`/transaksi/${id}`}>
       <Button variant='contained' sx={{width:'100%',borderRadius:'16px'}}>Pesan Sekarang</Button>
@@ -315,7 +321,7 @@ const DetailKamera = () => {
     </Stack>
     
     </Container>
-    </div>
+    </Container>
   )
 }
 

@@ -6,7 +6,7 @@ import {
   Home,
   Dashboard,
 } from "@mui/icons-material";
-import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Container, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link ,useLocation} from "react-router-dom";
 
@@ -14,7 +14,7 @@ const Navbar = () => {
   const [value, setValue] = useState("Home");
   const [color, setColor] = useState("");
   const location = useLocation()
-  console.log(location.pathname);
+ 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
@@ -24,20 +24,24 @@ const Navbar = () => {
       handleChange('Profile')
     }else if(location.pathname == '/katalog'){
       handleChange('Katalog')
-    } else{
+    }else if(location.pathname == '/dashboard'){
+      handleChange('Dashboard')
+    }
+     else{
       handleChange('Home')
     }
   
   },[location.pathname])
 
   return (
+   
     <Paper
       sx={{
         position: "fixed",
         bottom: 0,
         left: 0,
         right: 0,
-        padding: "12px 24px",
+        padding: "12px 24px",      
       }}
       elevation={3}
     >
@@ -69,14 +73,15 @@ const Navbar = () => {
         </Link>
         <Link to="/dashboard">
           <BottomNavigationAction
-            value="dashboard"
+            value="Dashboard"
             label="dasboard"
-            sx={{ color: value === "dashboard" ? "#007BFF" : "" }}
+            sx={{ color: value === "Dashboard" ? "#007BFF" : "" }}
             icon={<Dashboard />}
           />
         </Link>
       </BottomNavigation>
     </Paper>
+   
   );
 };
 

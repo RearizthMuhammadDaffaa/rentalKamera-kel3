@@ -10,7 +10,13 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Profile = () => {
   return (
-    <Stack direction="column"  >
+    <Container direction="column" 
+    justifyContent='center'
+    sx={{
+      width:{md:'50%',sm:"100%"},
+     
+    }}
+    >
       <Container sx={{ display: "flex", justifyContent: "space-between" }}>
         <h4>Profile</h4>
       </Container>
@@ -168,7 +174,7 @@ const Profile = () => {
           
         </Box>
       </Box>
-    </Stack>
+    </Container>
   );
 };
 

@@ -7,14 +7,35 @@ import axios from 'axios';
 const HeaderBrand = ({type,setSelectedMerk}) => {
   const [data,setData] = useState([]);
 
-  const getData = async ()=>{
-    const response = await axios.get('http://localhost:5000/merk')
-    setData(response.data)
+  // const getData = async ()=>{
+  //   const response = await axios.get('http://localhost:5000/merk')
+  //   setData(response.data)
+  // }
+
+  const getData = async () => {
+    try {
+      const response1 = await axios.get('http://localhost:5000/merk');
+      const merkData = response1.data;
+  
+      const promises = merkData.map(async (item) => {
+        const response = await axios.get(`http://localhost:5000/kamera/count?merk=${item.name}`);
+        return { merk: item, kameraCount: response.data }; // Objek yang berisi nama merek dan jumlah kamera
+      });
+  
+      const combinedData = await Promise.all(promises);
+  
+      setData(combinedData);
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
   }
 
   useEffect(()=>{
     getData()
+    
   },[])
+
+  console.log(data);
 
   return (
     <Box 
@@ -37,9 +58,9 @@ const HeaderBrand = ({type,setSelectedMerk}) => {
        
        {data.map((item)=>(
           <Box 
-            key={item.id}
+            key={item.merk.id}
             component='div'
-            onClick={()=>setSelectedMerk(item.name)}
+            onClick={()=>setSelectedMerk(item.merk.name)}
           sx={{
             display:'flex',
             padding:'21px 0px 21px 0px',
@@ -53,12 +74,12 @@ const HeaderBrand = ({type,setSelectedMerk}) => {
             flexShrink:'0',
             cursor:'pointer'
           }}>
-            <img src={item.url} alt="" width="60px" height="11"/>
+            <img src={item.merk.url} alt="" width="60px" height="11"/>
             <Typography variant='subtitle2'>
-              {item.name}
+              {item.merk.name}
             </Typography>
             <Typography variant="caption" sx={{color:'#007BFF',fontWeight:'700'}}>
-              +8
+              {item.kameraCount}
             </Typography>
           </Box>
        ))}

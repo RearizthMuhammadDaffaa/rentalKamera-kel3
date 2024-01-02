@@ -1,11 +1,12 @@
 import { Search } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import List from '../components/List'
 import "./../app.css"
 import HeaderBrand from '../components/HeaderBrand'
 import axios from 'axios';
+import Navbar from '../components/Navbar'
 
 const Home = () => {
   const [data,setData] = useState([]);
@@ -18,14 +19,19 @@ const Home = () => {
     getData()
   },[])
   return (
-   <div className="container">
+   <Container 
+    sx={{
+      width:{md:'50%',sm:"100%"},
+     
+    }}
+   >
       <Header />
       <HeaderBrand />
       {data.map((item)=>(
         <List kamera={item} key={item.id} />
       ))}
-      
-   </div>
+   
+   </Container>
   )
 }
 

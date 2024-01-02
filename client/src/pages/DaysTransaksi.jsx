@@ -54,7 +54,7 @@ const DaysTransaksi = () => {
   return (
     <Container sx={{
       height:'100vh',
-      width:'100%'
+      width:{md:'50%',sm:"100%"},
     }}>
       <Box display="flex" alignItems="center" gap="40px" padding="25px 0px" width='100%'>
         <Box
@@ -78,6 +78,13 @@ const DaysTransaksi = () => {
         width:"100%"
        }}
       >
+<Container
+  sx={{
+    padding:'0',
+    margin:'0'
+
+  }}
+>
 
       <DateRange
   editableDateInputs={true}
@@ -88,6 +95,7 @@ const DaysTransaksi = () => {
   moveRangeOnFirstSelection={false}
   ranges={date}
 />
+</Container>
       </Container>
     <Container
       sx={{

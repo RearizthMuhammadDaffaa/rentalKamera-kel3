@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import HeaderBrand from "../components/HeaderBrand";
 import List from '../components/List'
 import axios from "axios";
+import { Container } from "@mui/material";
 
 const Katalog = () => {
   const [data,setData] = useState([]);
@@ -29,13 +30,18 @@ const Katalog = () => {
     
   },[selectedMerk])
   return (
-    <div className="container">
+    <Container 
+    sx={{
+      width:{md:'50%',sm:"100%"},
+     
+    }}
+    >
       <HeaderBrand type="katalog" selectedMerk ={selectedMerk} setSelectedMerk={setSelectedMerk}/>
       {data.map((item)=>(
           <List kamera={item} key={item.id}  />
       ))}
       
-    </div>
+    </Container>
   );
 };
 

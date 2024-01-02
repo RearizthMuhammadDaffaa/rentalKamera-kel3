@@ -2,10 +2,13 @@ import Kamera from "../models/KameraModels.js";
 import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
+import { Op } from "sequelize";
 
 export const getKamera = async (req,res)=>{
   try {
-    const response = await Kamera.findAll();
+    const response = await Kamera.findAll({
+      order: [['createdAt', 'DESC']] 
+    });
     res.json(response);
   } catch (error) {
     console.log(error.message);
@@ -79,12 +82,13 @@ export const updatetKamera = async(req,res)=>{
   if(!kamera) return res.status(404).json({msg:'no data found'})
   let fileName = "";
 if(req.files === null){
-  fileName = Kamera.images;
+  fileName = kamera.images;
 }else{
   const file = req.files.img;
   const fileSize = file.data.length;
+  const uniqueFilename = uuidv4();
   const ext = path.extname(file.name);
-  fileName = file.md5 +ext;
+  fileName =  `${uniqueFilename}${ext}`;
 
   const allowedTypes = ['.jpg','.png','.jpeg'];
   if(!allowedTypes.includes(ext.toLowerCase())) return res.status(422).json({msg:'Invalid Images'})
@@ -152,7 +156,9 @@ export const deleteKamera = async(req,res)=>{
 export const getKameraByName = async(req,res)=>{
   try {
     const name = req.query.name;
-  const response = await Kamera.findAll({where:{name:name}})
+  const response = await Kamera.findAll({where:{
+    [Op.like]:name
+  }})
   res.json(response)
   res.status(400).json({msg:'data ditemukan'})
   } catch (error) {

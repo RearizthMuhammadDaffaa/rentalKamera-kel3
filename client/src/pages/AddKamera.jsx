@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControl, InputBase, MenuItem, Select, Typography } from '@mui/material'
+import { Box, Button, Container, FormControl, InputBase, MenuItem, NativeSelect, Select, Typography } from '@mui/material'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -284,7 +284,7 @@ const AddKamera = () => {
         >
           
           <FormControl>
-            <Select
+            <NativeSelect
             value={merk}
              onChange={(e)=>setMerk(e.target.value)}
               sx={{
@@ -292,11 +292,12 @@ const AddKamera = () => {
                 height:'50px'
               }}
             >
+              <option>Merk</option>
              {data.map((item)=>(
 
-              <MenuItem value={item.name}>{item.name}</MenuItem>
+              <option key={item.id} value={item.name}>{item.name}</option>
              ))}
-            </Select>
+            </NativeSelect>
           </FormControl>
        
         </Box>
